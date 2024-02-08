@@ -4,13 +4,13 @@ GET http://localhost:3001/info/
 GET http://localhost:3001/api/persons/
 
 ###
-DELETE  http://localhost:3001/api/persons/4
+DELETE  http://localhost:3001/api/persons/3
 
 ###
 POST http://localhost:3001/api/persons
 Content-Type: application/json
 
 {
-  "name": "Postman",
+  "name": "aa",
   "number": 123
 }
