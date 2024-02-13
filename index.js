@@ -4,6 +4,8 @@ const cors = require("cors");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const Person = require("./models/person");
+const notFound = require("./middleware/notFound");
+const handleErrors = require("./middleware/handleErrors");
 
 const app = express();
 
@@ -44,7 +46,7 @@ app.get("/api/persons/:id", (req, res) => {
   const person = persons.find((person) => person.id === id);
 
   person ? res.json(person) : res.status(404).end();
-});
+    });
 
 app.post("/api/persons", (req, res) => {
   const body = req.body;
@@ -66,11 +68,16 @@ app.post("/api/persons", (req, res) => {
   });
 });
 
-app.delete("/api/persons/:id", (req, res) => {
-  Person.findByIdAndDelete(req.params.id).then((result) => {
-    res.status(204).end();
-  });
+app.delete("/api/persons/:id", (req, res, next) => {
+  Person.findByIdAndDelete(req.params.id)
+    .then((result) => {
+      res.status(204).end();
+    })
+    .catch((error) => next(error));
 });
+
+app.use(notFound);
+app.use(handleErrors);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
