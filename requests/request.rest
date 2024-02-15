@@ -7,10 +7,10 @@ GET http://localhost:3001/api/persons/65cbc0de2038ac999ea7e7dd
 DELETE  http://localhost:3001/api/persons/65cbc0de2038ac999ea7e7dd
 
 ###
-PUT http://localhost:3001/api/persons/65cbc0de2038ac999ea7e7dd
+POST http://localhost:3001/api/persons/
 Content-Type: application/json
 
 {
-  "name": "Adrian",
+  "name": "lol",
   "number": 1234
 }
